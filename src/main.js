@@ -23,10 +23,11 @@ randomCoverButton.addEventListener('click', randomBook)
 
 //assembles random book: image, title, and descriptors for tagline
 function randomBook() {
-  image.src = covers[getRandomIndex(covers)];
-  title.innerText = titles[getRandomIndex(titles)];
-  taglineOne.innerText = descriptors[getRandomIndex(descriptors)];
-  taglineTwo.innerText = descriptors[getRandomIndex(descriptors)];
+  currentCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)])
+  image.src = currentCover.cover;
+  title.innerText = currentCover.title;
+  taglineOne.innerText = currentCover.tagline1;
+  taglineTwo.innerText = currentCover.tagline2;
 }
 
 
