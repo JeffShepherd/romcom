@@ -9,6 +9,7 @@ var ownCoverButton = document.querySelector('.make-new-button');
 var saveCoverButton = document.querySelector('.save-cover-button');
 var homeButton = document.querySelector('.home-button');
 var form = document.querySelector('.form-view');
+var completeCoverView = document.querySelector('.home-view');
 
 //// We've provided a few variables below
 var savedCovers = [
@@ -23,25 +24,22 @@ window.addEventListener('load', randomBook); //with event listeners, invoking fu
 randomCoverButton.addEventListener('click', randomBook);
 
 ownCoverButton.addEventListener('click', displayFormView);
-//on click of make own cover buttom:
-
-
 
 
 //// Create your event handlers and other functions here 👇
 
-//assembles random book: image, title, and descriptors for tagline
 function displayFormView() {
-  //hide randomcover
-  //save cover button
-  //make home button appear
-  //show form
+  completeCoverView.classList.add('hidden');//hide randomcover
+  saveCoverButton.classList.add('hidden');  //save cover button
+  homeButton.classList.remove('hidden');//make home button appear
+  form.classList.remove('hidden');//show form
+  randomCoverButton.classList.add('hidden'); //hide random cover button
 }
 
 
 
 
-
+//assembles random book: image, title, and descriptors for tagline
 function randomBook() {
   currentCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)])
   image.src = currentCover.cover;
