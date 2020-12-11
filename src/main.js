@@ -56,12 +56,12 @@ function displaySavedCovers() {
 }
 
 function displayHomeView() {
+  form.classList.add('hidden');  //hide form
   completeCoverView.classList.remove('hidden');//show randomcover
   randomCoverButton.classList.remove('hidden')//how show new random cover button
   saveCoverButton.classList.remove('hidden');//show save cover button
-  viewSavedCovers.classList.remove('hidden');  //show view Saved Covers button
+  viewSavedCoversButton.classList.remove('hidden');  //show view Saved Covers button
   ownCoverButton.classList.remove('hidden');  //show make your own cover button
-  form.classList.add('hidden');  //hide form
   savedCoversLibrary.classList.add('hidden');
   homeButton.classList.add('hidden');
  }
