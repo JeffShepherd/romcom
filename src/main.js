@@ -34,6 +34,8 @@ ownCoverButton.addEventListener('click', displayFormView);
 
 viewSavedCoversButton.addEventListener('click', displaySavedCovers)
 
+homeButton.addEventListener('click', displayHomeView)
+
 //// Create your event handlers and other functions here 👇
 
 function displayFormView() {
@@ -50,7 +52,19 @@ function displaySavedCovers() {
   saveCoverButton.classList.add('hidden');//hide save cover button
   homeButton.classList.remove('hidden');//show home button
   completeCoverView.classList.add('hidden');//hide randomcover
+  form.classList.add('hidden'); // hide form
 }
+
+function displayHomeView() {
+  completeCoverView.classList.remove('hidden');//show randomcover
+  randomCoverButton.classList.remove('hidden')//how show new random cover button
+  saveCoverButton.classList.remove('hidden');//show save cover button
+  viewSavedCovers.classList.remove('hidden');  //show view Saved Covers button
+  ownCoverButton.classList.remove('hidden');  //show make your own cover button
+  form.classList.add('hidden');  //hide form
+  savedCoversLibrary.classList.add('hidden');
+  homeButton.classList.add('hidden');
+ }
 
 
 //assembles random book: image, title, and descriptors for tagline
