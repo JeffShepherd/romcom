@@ -29,17 +29,15 @@ var savedCoversSection = document.querySelector('.saved-covers-section');
 
 //// We've provided a few variables below
 var savedCovers = [];
-
 var currentCover;
 
 //// Add your event listeners here 👇
-window.addEventListener('load', randomBook); //with event listeners, invoking functions do not need the parens
+randomBook();
 randomCoverButton.addEventListener('click', randomBook);
 makeOwnCoverButton.addEventListener('click', displayFormView);
 viewSavedCoversButton.addEventListener('click', displaySavedCovers)
 homeButton.addEventListener('click', displayHomeView)
 bookFormSaveButton.addEventListener('click', createUserBook);
-
 saveCoverButton.addEventListener('click', saveCover)
 
 //// Create your event handlers and other functions here 👇
@@ -61,32 +59,40 @@ function createUserBook(event) {
   descriptors.push(userDesc1Input.value); //get descriptor1 and push to array
   descriptors.push(userDesc2Input.value); //get descriptor2 and push to array
   currentCover = new Cover(userCoverInput.value, userTitleInput.value, userDesc1Input.value, userDesc2Input.value); //create new book instance with Covers class and assign to current cover
-  coverImage.src = currentCover.cover; //display values on home page
-  coverTitle.innerText = currentCover.title; //display values on home page
-  taglineOne.innerText = currentCover.tagline1; //display values on home page
-  taglineTwo.innerText = currentCover.tagline2; //display values on home page
+  assignValuesToElements();
   displayHomeView();
 }
 
-
+//
 
 function displayFormView() {
-  homeView.classList.add('hidden'); //hide randomcover
-  saveCoverButton.classList.add('hidden'); //save cover button
-  homeButton.classList.remove('hidden'); //make home button appear
   formView.classList.remove('hidden'); //show form
+  homeButton.classList.remove('hidden'); //make home button appear
+  homeView.classList.add('hidden'); //hide randomcover
   randomCoverButton.classList.add('hidden'); //hide random cover button
+  saveCoverButton.classList.add('hidden'); //save cover button
   savedCoversView.classList.add('hidden')
 }
 
 function displaySavedCovers() {
-  savedCoversView.classList.remove('hidden') // show saved cover section
-  randomCoverButton.classList.add('hidden') //hide show new random cover button
-  saveCoverButton.classList.add('hidden'); //hide save cover button
+  formView.classList.add('hidden'); // hide form
   homeButton.classList.remove('hidden'); //show home button
   homeView.classList.add('hidden'); //hide randomcover
-  formView.classList.add('hidden'); // hide form
+  randomCoverButton.classList.add('hidden') //hide show new random cover button
+  saveCoverButton.classList.add('hidden'); //hide save cover button
+  savedCoversView.classList.remove('hidden') // show saved cover section
   buildSavedCoverLibrary(); //invoke function to show saved covers
+}
+
+function displayHomeView() {
+  formView.classList.add('hidden'); //hide form
+  homeButton.classList.add('hidden');
+  homeView.classList.remove('hidden'); //show randomcover
+  makeOwnCoverButton.classList.remove('hidden'); //show make your own cover button
+  randomCoverButton.classList.remove('hidden') //how show new random cover button
+  saveCoverButton.classList.remove('hidden'); //show save cover button
+  savedCoversView.classList.add('hidden');
+  viewSavedCoversButton.classList.remove('hidden'); //show view Saved Covers button
 }
 
 function buildSavedCoverLibrary() {
@@ -97,35 +103,18 @@ function buildSavedCoverLibrary() {
   }
 }
 
-
-function displayHomeView() {
-  formView.classList.add('hidden'); //hide form
-  homeView.classList.remove('hidden'); //show randomcover
-  randomCoverButton.classList.remove('hidden') //how show new random cover button
-  saveCoverButton.classList.remove('hidden'); //show save cover button
-  viewSavedCoversButton.classList.remove('hidden'); //show view Saved Covers button
-  makeOwnCoverButton.classList.remove('hidden'); //show make your own cover button
-  savedCoversView.classList.add('hidden');
-  homeButton.classList.add('hidden');
-}
-
-//idea for refactoring//////
-function removeHidden(variableName) {
-  variableName.classList.remove('hidden')
-}
-
 //assembles random book: image, title, and descriptors for tagline
 function randomBook() {
   currentCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)]);
+  assignValuesToElements();
+}
+
+function assignValuesToElements() {
   coverImage.src = currentCover.cover;
   coverTitle.innerText = currentCover.title;
   taglineOne.innerText = currentCover.tagline1;
   taglineTwo.innerText = currentCover.tagline2;
 }
-
-
-///DRY IDEAS
-//display current cover visuals on home page
 
 
 //// We've provided one function to get you started
