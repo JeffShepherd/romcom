@@ -12,11 +12,20 @@ var ownCoverButton = document.querySelector('.make-new-button');
 var saveCoverButton = document.querySelector('.save-cover-button');
 var homeButton = document.querySelector('.home-button');
 var viewSavedCoversButton = document.querySelector('.view-saved-button');
+var bookFormSaveButton = document.querySelector('.create-new-book-button');
 
 // views
 var form = document.querySelector('.form-view');
 var completeCoverView = document.querySelector('.home-view');
 var savedCoversLibrary = document.querySelector('.saved-view')
+
+//form fields
+var userCover = document.querySelector('.user-cover');
+var userTitle = document.querySelector('.user-title');
+var userDesc1 = document.querySelector('.user-desc1');
+var userDesc2 = document.querySelector('.user-desc2');
+
+
 
 //// We've provided a few variables below
 var savedCovers = [
@@ -27,16 +36,31 @@ var currentCover;
 
 //// Add your event listeners here 👇
 window.addEventListener('load', randomBook); //with event listeners, invoking functions do not need the parens
-
 randomCoverButton.addEventListener('click', randomBook);
-
 ownCoverButton.addEventListener('click', displayFormView);
-
 viewSavedCoversButton.addEventListener('click', displaySavedCovers)
-
 homeButton.addEventListener('click', displayHomeView)
 
+bookFormSaveButton.addEventListener('click', createUserBook);
+
 //// Create your event handlers and other functions here 👇
+
+////function to trigger when save button is clicked
+function createUserBook(event) {
+  event.preventDefault();
+  covers.push(userCover.value);//get url and push to cover array
+  titles.push(userTitle.value);//get title and push to title array
+  descriptors.push(userDesc1.value);//get descriptor1 and push to array
+  descriptors.push(userDesc2.value);//get descriptor2 and push to array
+  currentCover = new Cover(userCover.value, userTitle.value, userDesc1.value, userDesc2.value);//create new book instance with Covers class and assign to current cover
+  image.src = currentCover.cover;//display values on home page
+  title.innerText = currentCover.title;//display values on home page
+  taglineOne.innerText = currentCover.tagline1;//display values on home page
+  taglineTwo.innerText = currentCover.tagline2;//display values on home page
+  displayHomeView();
+}
+
+
 
 function displayFormView() {
   completeCoverView.classList.add('hidden');//hide randomcover
@@ -69,14 +93,15 @@ function displayHomeView() {
 
 //assembles random book: image, title, and descriptors for tagline
 function randomBook() {
-  currentCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)])
+  currentCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)]);
   image.src = currentCover.cover;
   title.innerText = currentCover.title;
   taglineOne.innerText = currentCover.tagline1;
   taglineTwo.innerText = currentCover.tagline2;
 }
 
-
+///DRY IDEAS
+//display current cover visuals on home page
 
 
 //// We've provided one function to get you started
