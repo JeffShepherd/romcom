@@ -25,12 +25,10 @@ var userTitle = document.querySelector('.user-title');
 var userDesc1 = document.querySelector('.user-desc1');
 var userDesc2 = document.querySelector('.user-desc2');
 
-
+//var savedCoversSection = document.querySelector('.saved-covers-section')
 
 //// We've provided a few variables below
-var savedCovers = [
-  new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
-];
+var savedCovers = [];
 
 var currentCover;
 
@@ -40,10 +38,16 @@ randomCoverButton.addEventListener('click', randomBook);
 ownCoverButton.addEventListener('click', displayFormView);
 viewSavedCoversButton.addEventListener('click', displaySavedCovers)
 homeButton.addEventListener('click', displayHomeView)
-
 bookFormSaveButton.addEventListener('click', createUserBook);
 
+saveCoverButton.addEventListener('click', saveCover)
+
 //// Create your event handlers and other functions here 👇
+
+function saveCover() {
+    savedCovers.push(currentCover);
+}
+
 
 ////function to trigger when save button is clicked
 function createUserBook(event) {
