@@ -76,6 +76,7 @@ function displayFormView() {
   homeButton.classList.remove('hidden'); //make home button appear
   form.classList.remove('hidden'); //show form
   randomCoverButton.classList.add('hidden'); //hide random cover button
+  savedCoversLibrary.classList.add('hidden')
 }
 
 function displaySavedCovers() {
