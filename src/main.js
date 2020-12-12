@@ -43,9 +43,19 @@ bookFormSaveButton.addEventListener('click', createUserBook);
 saveCoverButton.addEventListener('click', saveCover)
 
 //// Create your event handlers and other functions here 👇
-
 function saveCover() {
+  if (savedCovers.length > 0) {
+    for (i = 0; i < savedCovers.length; i++) {
+      if (currentCover.id === savedCovers[i].id) {
+        break;
+      } else {
+        savedCovers.push(currentCover);
+        break;
+      }
+    }
+  } else {
     savedCovers.push(currentCover);
+  }
 }
 
 
