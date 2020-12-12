@@ -1,29 +1,29 @@
 //// Create variables targetting the relevant DOM elements here 👇
 
 // book elements
-var image = document.querySelector('.cover-image');
-var title = document.querySelector('.cover-title');
+var coverImage = document.querySelector('.cover-image');
+var coverTitle = document.querySelector('.cover-title');
 var taglineOne = document.querySelector('.tagline-1');
 var taglineTwo = document.querySelector('.tagline-2');
 
 // buttons
 var randomCoverButton = document.querySelector('.random-cover-button');
-var ownCoverButton = document.querySelector('.make-new-button');
+var makeOwnCoverButton = document.querySelector('.make-new-button');
 var saveCoverButton = document.querySelector('.save-cover-button');
 var homeButton = document.querySelector('.home-button');
 var viewSavedCoversButton = document.querySelector('.view-saved-button');
 var bookFormSaveButton = document.querySelector('.create-new-book-button');
 
 // views
-var form = document.querySelector('.form-view');
-var completeCoverView = document.querySelector('.home-view');
-var savedCoversLibrary = document.querySelector('.saved-view');
+var formView = document.querySelector('.form-view');
+var homeView = document.querySelector('.home-view');
+var savedCoversView = document.querySelector('.saved-view');
 
 //form fields
-var userCover = document.querySelector('.user-cover');
-var userTitle = document.querySelector('.user-title');
-var userDesc1 = document.querySelector('.user-desc1');
-var userDesc2 = document.querySelector('.user-desc2');
+var userCoverInput = document.querySelector('.user-cover');
+var userTitleInput = document.querySelector('.user-title');
+var userDesc1Input = document.querySelector('.user-desc1');
+var userDesc2Input = document.querySelector('.user-desc2');
 
 var savedCoversSection = document.querySelector('.saved-covers-section');
 
@@ -35,7 +35,7 @@ var currentCover;
 //// Add your event listeners here 👇
 window.addEventListener('load', randomBook); //with event listeners, invoking functions do not need the parens
 randomCoverButton.addEventListener('click', randomBook);
-ownCoverButton.addEventListener('click', displayFormView);
+makeOwnCoverButton.addEventListener('click', displayFormView);
 viewSavedCoversButton.addEventListener('click', displaySavedCovers)
 homeButton.addEventListener('click', displayHomeView)
 bookFormSaveButton.addEventListener('click', createUserBook);
@@ -56,13 +56,13 @@ function saveCover() {
 ////function to trigger when save button is clicked
 function createUserBook(event) {
   event.preventDefault();
-  covers.push(userCover.value); //get url and push to cover array
-  titles.push(userTitle.value); //get title and push to title array
-  descriptors.push(userDesc1.value); //get descriptor1 and push to array
-  descriptors.push(userDesc2.value); //get descriptor2 and push to array
-  currentCover = new Cover(userCover.value, userTitle.value, userDesc1.value, userDesc2.value); //create new book instance with Covers class and assign to current cover
-  image.src = currentCover.cover; //display values on home page
-  title.innerText = currentCover.title; //display values on home page
+  covers.push(userCoverInput.value); //get url and push to cover array
+  titles.push(userTitleInput.value); //get title and push to title array
+  descriptors.push(userDesc1Input.value); //get descriptor1 and push to array
+  descriptors.push(userDesc2Input.value); //get descriptor2 and push to array
+  currentCover = new Cover(userCoverInput.value, userTitleInput.value, userDesc1Input.value, userDesc2Input.value); //create new book instance with Covers class and assign to current cover
+  coverImage.src = currentCover.cover; //display values on home page
+  coverTitle.innerText = currentCover.title; //display values on home page
   taglineOne.innerText = currentCover.tagline1; //display values on home page
   taglineTwo.innerText = currentCover.tagline2; //display values on home page
   displayHomeView();
@@ -71,21 +71,21 @@ function createUserBook(event) {
 
 
 function displayFormView() {
-  completeCoverView.classList.add('hidden'); //hide randomcover
+  homeView.classList.add('hidden'); //hide randomcover
   saveCoverButton.classList.add('hidden'); //save cover button
   homeButton.classList.remove('hidden'); //make home button appear
-  form.classList.remove('hidden'); //show form
+  formView.classList.remove('hidden'); //show form
   randomCoverButton.classList.add('hidden'); //hide random cover button
-  savedCoversLibrary.classList.add('hidden')
+  savedCoversView.classList.add('hidden')
 }
 
 function displaySavedCovers() {
-  savedCoversLibrary.classList.remove('hidden') // show saved cover section
+  savedCoversView.classList.remove('hidden') // show saved cover section
   randomCoverButton.classList.add('hidden') //hide show new random cover button
   saveCoverButton.classList.add('hidden'); //hide save cover button
   homeButton.classList.remove('hidden'); //show home button
-  completeCoverView.classList.add('hidden'); //hide randomcover
-  form.classList.add('hidden'); // hide form
+  homeView.classList.add('hidden'); //hide randomcover
+  formView.classList.add('hidden'); // hide form
   buildSavedCoverLibrary(); //invoke function to show saved covers
 }
 
@@ -99,22 +99,26 @@ function buildSavedCoverLibrary() {
 
 
 function displayHomeView() {
-  form.classList.add('hidden'); //hide form
-  completeCoverView.classList.remove('hidden'); //show randomcover
+  formView.classList.add('hidden'); //hide form
+  homeView.classList.remove('hidden'); //show randomcover
   randomCoverButton.classList.remove('hidden') //how show new random cover button
   saveCoverButton.classList.remove('hidden'); //show save cover button
   viewSavedCoversButton.classList.remove('hidden'); //show view Saved Covers button
-  ownCoverButton.classList.remove('hidden'); //show make your own cover button
-  savedCoversLibrary.classList.add('hidden');
+  makeOwnCoverButton.classList.remove('hidden'); //show make your own cover button
+  savedCoversView.classList.add('hidden');
   homeButton.classList.add('hidden');
 }
 
+//idea for refactoring//////
+function removeHidden(variableName) {
+  variableName.classList.remove('hidden')
+}
 
 //assembles random book: image, title, and descriptors for tagline
 function randomBook() {
   currentCover = new Cover(covers[getRandomIndex(covers)], titles[getRandomIndex(titles)], descriptors[getRandomIndex(descriptors)], descriptors[getRandomIndex(descriptors)]);
-  image.src = currentCover.cover;
-  title.innerText = currentCover.title;
+  coverImage.src = currentCover.cover;
+  coverTitle.innerText = currentCover.title;
   taglineOne.innerText = currentCover.tagline1;
   taglineTwo.innerText = currentCover.tagline2;
 }
