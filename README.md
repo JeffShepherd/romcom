@@ -39,7 +39,6 @@ https://jeffshepherd.github.io/romcom/
 
 **Future additions:**
 The following features should be added in to future versions of the app:
-* Capability to delete saved cover.
 * Data validation on the user input form - prevent submission of form if one or more fields are blank.
 * Reordering cover objects in the saved covers library by dragging.
 
