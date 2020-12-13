@@ -65,6 +65,24 @@ function displaySavedCovers() {
   saveCoverButton.classList.add('hidden');
   savedCoversView.classList.remove('hidden');
   buildSavedCoverLibrary();
+  targetMiniCovers();
+}
+
+function targetMiniCovers() {
+  var miniCover = document.querySelectorAll('.mini-cover')
+  for (i = 0; i < miniCover.length; i++) {
+    miniCover[i].addEventListener('dblclick', deleteSavedCover)
+  }
+}
+
+function deleteSavedCover() {
+  for (i = 0; i <= savedCovers.length; i++) {
+    if (event.target.closest('section').id == savedCovers[i].id) {
+      savedCovers.splice(i, 1);
+      displaySavedCovers();
+      break;
+    }
+  }
 }
 
 function displayHomeView() {
@@ -81,9 +99,9 @@ function displayHomeView() {
 function buildSavedCoverLibrary() {
   var html = '';
   for (i = 0; i < savedCovers.length; i++) {
-    html += `<section class="mini-cover"><img class="cover-image" src=${savedCovers[i].cover}><h2 class="cover-title">${savedCovers[i].title}</h2><h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3><img class="price-tag" src="./assets/price.png"><img class="overlay" src="./assets/overlay.png"></section>`;
-    savedCoversSection.innerHTML = html;
+    html += `<section class="mini-cover" id=${savedCovers[i].id}><img class="cover-image" src=${savedCovers[i].cover}><h2 class="cover-title">${savedCovers[i].title}</h2><h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3><img class="price-tag" src="./assets/price.png"><img class="overlay" src="./assets/overlay.png"></section>`;
   }
+  savedCoversSection.innerHTML = html;
 }
 
 function randomBook() {
