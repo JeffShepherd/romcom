@@ -45,7 +45,15 @@ function createUserBook(event) {
   descriptors.push(userDesc2Input.value);
   currentCover = new Cover(userCoverInput.value, userTitleInput.value, userDesc1Input.value, userDesc2Input.value);
   assignValuesToElements();
+  removeFormValues();
   displayHomeView();
+}
+
+function removeFormValues() {
+  userCoverInput.value = '';
+  userTitleInput.value = '';
+  userDesc1Input.value = '';
+  userDesc2Input.value = '';
 }
 
 function displayFormView() {
